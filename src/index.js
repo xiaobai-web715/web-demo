@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Select from '../src/page/Select/index'
+import RouteIndeX from '../src/router/index'
+import './index.scss'
 
 ReactDOM.render(
-    <Select/>,
+    <RouteIndeX/>,
     document.getElementById('app')
 )

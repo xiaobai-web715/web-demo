@@ -1,0 +1,61 @@
+.mask{
+    pointer-events: none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:2;
+    display:none;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,0.5);
+    &.show{
+        display:block;
+    }
+}
+.title{
+    border : 1px solid black;
+    width : 200px;
+    background-color: white;
+    height:21px;
+    line-height:21px;
+}
+.select{
+    border : 1px solid black;
+    border-top : 0;
+    width: 200px;
+    visibility:hidden;//这里不用display:none的目的就是为了能够成功给滚动轴进行定位
+    background-color: red;
+    position:absolute;
+    z-index:4;
+    &.show{
+        visibility:visible;
+    }
+    .content{
+        overflow-y: scroll;
+        line-height:21px;
+    }
+    .value{
+        line-height:21px;
+    }
+}
+
+// .three{
+//     border : 1px solid black;
+//     width : 200px;
+//     background-color: white;
+//     height:21px;
+//     line-height:21px;
+// }
+// .four{
+//     border : 1px solid black;
+//     border-bottom : 0;
+//     width: 200px;
+//     visibility:hidden;
+//     background-color: red;
+//     position:absolute;
+//     z-index:4;
+//     overflow-y: scroll;
+// }
+// .four.showUP{
+//     visibility:visible;
+// }
