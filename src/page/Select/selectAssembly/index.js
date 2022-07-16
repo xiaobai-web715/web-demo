@@ -1,10 +1,9 @@
 import React , {useState, useEffect , useRef} from 'react'
 import './index.scss'
-const placeholder = '请选择你想选择的内容'
 const Select = (props) => {
-    const {options , onChange} = props
+    const {options , onChange , placeholder} = props
     const [show , setShow] = useState(false)
-    const [value , setValue] = useState(placeholder)
+    const [value , setValue] = useState(placeholder ? placeholder : '请选择你想选择的选项')
     const [reverse , setReverse] = useState(false)
     const titleDOM = useRef()//用来获取当前UI组件的定位
     const selectDOM = useRef()
