@@ -1,5 +1,11 @@
 import React , {useState, useEffect , useRef} from 'react'
 import './index.scss'
+//还未实现的(
+    // 1.select的样式要修改(√)
+    // 2.遮罩产生的时候如何禁止掉其可以触发一下穿透的事件(像window下的滚动条滚动,touchmove事件等等)
+    // 3.还可以添加一个字段(表示用户需不需要将选择部分在下拉框中也呈现出来，然后给与对应的高亮提示)
+    // 4.还有select的滚动条如何去掉(以及其滚动到底部的时候如何也禁止掉其可以继续去滚动window下的滚动条的操作)(√)
+// )
 const Select = (props) => {
     const {options , onChange , placeholder} = props
     const [show , setShow] = useState(false)
@@ -43,11 +49,11 @@ const Select = (props) => {
         let dom = title.current
         let left = offsetLeft(dom)
         let top = offsetTop(dom)
-        let height = title.current.clientHeight;
-        //dom.clientHeight(是包含padding，border，实际内容的整体的高度)
-        //dom.scrollHeight(是获取的DOM的完整的值,clientHeight可以说是它的一部分)
+        // dom.offsetHeight(返回元素实际的大小，包括边框、内容、内边距和滚动条)
+        let height = title.current.offsetHeight;
         //bottom是相对于视口来说的
         let bottom = document.documentElement.clientHeight - top - height
+        //dom.clientHeight(元素可视区域padding和内容的高度和,如果有滚动条则会减去滚动条)
         let selectNum = props.num || 6
         let selectHeight = selectNum * height
         console.log(selectHeight , height)
@@ -58,7 +64,7 @@ const Select = (props) => {
             setReverse(true)
             select.current.style = `bottom : ${bottom}px ; left : ${left}px ;`
             content.current.scrollTop = content.current.scrollHeight - selectHeight
-            // console.log('content的值', content.current.scrollHeight , selectHeight)
+            //dom.scrollHeight(元素的整体高度包括溢出的部分(不包括外边距)，同样有滚动条也会减去滚动条,clientHeight可以说是它的一部分)
         }
         content.current.style = `max-height:${selectHeight}px`
     }
@@ -74,22 +80,22 @@ const Select = (props) => {
     return (
         <>
             <div className={`mask ${show ? 'show' : ''}`} onClick={maskDisapper}></div>
-            <div>
+            <div className='box'>
                 <div className='title' onClick={selectShow} ref={titleDOM}>{value}</div>
-                <div className={`select ${show ? 'show' : ''}`} ref={selectDOM}>
-                    {!reverse ? <div className='value' onClick={selectDisappear}>{value}</div> : ''}
+                <div className={`select ${show ? 'show' : ''} ${reverse ? 'borderBottom' : 'borderTop'}`} ref={selectDOM}>
+                    {!reverse ? <div className={`value ${reverse ? 'borderBottom' : 'borderTop'}`} onClick={selectDisappear}>{value}</div> : ''}
                     <div className='content' ref={selectContent}>
                         {
                             (reverse ? [...options].reverse() : options).map((item) => {
                                 if(item !== value){
                                     return(
-                                        <div onClick={selectValue} key={item}>{item}</div>
+                                        <div className={`item ${reverse ? 'borderBottom' : 'borderTop'}`} onClick={selectValue} key={item}>{item}</div>
                                     )
                                 }
                             })
                         }
                     </div>
-                    {reverse ? <div className='value' onClick={selectDisappear}>{value}</div> : ''}
+                    {reverse ? <div className={`value ${reverse ? 'borderBottom' : 'borderTop'}`} onClick={selectDisappear}>{value}</div> : ''}
                 </div>
             </div>
         </>

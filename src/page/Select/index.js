@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from './selectAssembly'
+import './index.scss'
 
 const Index = () => {
     const selectValue = (value) => {
@@ -14,9 +15,11 @@ const Index = () => {
                 palceholder:代表你想在筛选框框中看到的初始底层文字 string//非必传 默认'请选择你想选择的内容'
          */}
         <Select placeholder='请选择你最喜欢的电影' options={['当幸福来敲门' , '阿甘正传' , '肖申克的救赎', '图灵' , '灵魂之旅', '你的名字' , '天气之子', '秒速五厘米']} num={7} onChange={selectValue}/>
-        <div style={{height:'1000px',width:'100%',backgroundColor:'yellow'}}></div>
-        <Select placeholder='请选择你最讨厌的电影' options={['当幸福来敲门' , '阿甘正传' , '肖申克的救赎', '图灵' , '灵魂之旅', '你的名字' , '天气之子', '秒速五厘米']} num={4} onChange={selectValue}/>
-        <div style={{height:'100px',width:'100%'}}></div>
+        <div className='bg-1'></div>
+        <div className='select-2'>
+          <Select placeholder='请选择你最讨厌的电影' options={['当幸福来敲门' , '阿甘正传' , '肖申克的救赎', '图灵' , '灵魂之旅', '你的名字' , '天气之子', '秒速五厘米']} num={4} onChange={selectValue}/>
+        </div>
+        <div className='bg-2'></div>
     </div>
   )
 }
